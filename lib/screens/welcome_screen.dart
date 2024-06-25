@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/screens/registration_screen.dart';
-
+import 'package:flutter_chat_app/widgets/rounded_button.dart';
 import 'login_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -12,11 +13,32 @@ class WelcomeScreen extends StatefulWidget {
   WelcomeScreenState createState() => WelcomeScreenState();
 }
 
-class WelcomeScreenState extends State<WelcomeScreen> {
+class WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+
+  late AnimationController controller;
+  late Animation animation;
+
+  @override
+  void initState(){
+    super.initState();
+    controller = AnimationController(duration: const Duration(seconds: 1), vsync: this,);
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white).animate(controller);
+    controller.forward();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -25,47 +47,34 @@ class WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                SizedBox(
-                  height: 60.0,
-                  child: Image.asset('images/logo.png'),
+                Hero(
+                  tag: 'logo',
+                  child: SizedBox(height: 60.0, child: Image.asset('images/logo.png'),),
                 ),
-                const Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
+                SizedBox(
+                  width: 250.0,
+                  child: DefaultTextStyle(
+                    style: const TextStyle(fontSize: 30.0, color: Colors.indigo),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText('Quick Chat', speed: const Duration(milliseconds: 60)),
+                        TypewriterAnimatedText('QChat', speed: const Duration(milliseconds: 60)),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 48.0,),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {Navigator.pushNamed(context, LoginScreen.id);},
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: const Text('Log In', style: TextStyle(color: Colors.white),),
-                ),
-              ),
+            const RoundedButton(
+              text: 'Log In',
+              screenId: LoginScreen.id,
+              color: Colors.lightBlueAccent,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {Navigator.pushNamed(context, RegistrationScreen.id);},
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: const Text('Register',style: TextStyle(color: Colors.white),),
-                ),
-              ),
+            const RoundedButton(
+              text: 'Register',
+              screenId: RegistrationScreen.id,
+              color: Colors.blueAccent,
             ),
           ],
         ),
