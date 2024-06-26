@@ -4,13 +4,13 @@ class RoundedButton extends StatelessWidget {
   const RoundedButton({
     super.key,
     required this.text,
-    required this.screenId,
+    required this.onPressed,
     required this.color,
     this.textColor = Colors.white,
   });
 
   final String text;
-  final String screenId;
+  final Function onPressed;
   final Color color;
   final Color? textColor;
 
@@ -23,7 +23,7 @@ class RoundedButton extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(30.0),
         child: MaterialButton(
-          onPressed: () { Navigator.pushNamed(context, screenId); },
+          onPressed: () { onPressed(); },
           minWidth: 200.0,
           height: 42.0,
           child: Text(text, style: TextStyle(color: textColor),),

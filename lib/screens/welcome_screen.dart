@@ -66,14 +66,14 @@ class WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderS
               ],
             ),
             const SizedBox(height: 48.0,),
-            const RoundedButton(
+            RoundedButton(
               text: 'Log In',
-              screenId: LoginScreen.id,
+              onPressed: (){Navigator.pushNamed(context, LoginScreen.id);},
               color: Colors.lightBlueAccent,
             ),
-            const RoundedButton(
+            RoundedButton(
               text: 'Register',
-              screenId: RegistrationScreen.id,
+              onPressed: (){Navigator.pushNamed(context, RegistrationScreen.id);},
               color: Colors.blueAccent,
             ),
           ],

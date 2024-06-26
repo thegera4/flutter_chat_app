@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/constants.dart';
 import 'package:flutter_chat_app/screens/welcome_screen.dart';
 import 'package:flutter_chat_app/widgets/rounded_button.dart';
 
@@ -31,57 +32,23 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 48.0,),
             TextField(
+              decoration: kInputDecoration.copyWith(hintText: 'Enter your email'),
               onChanged: (value) {
                 //Do something with the user input.
               },
-              decoration: const InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
             ),
             const SizedBox(height: 8.0,),
             TextField(
+              decoration: kInputDecoration.copyWith(hintText: 'Enter your password'),
               onChanged: (value) {
                 //Do something with the user input.
               },
-              decoration: const InputDecoration(
-                hintText: 'Enter your password.',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
             ),
             const SizedBox(height: 24.0,),
-            const RoundedButton(
-                text: 'Log In',
-                screenId: WelcomeScreen.id,
-                color: Colors.lightBlueAccent,
+            RoundedButton(
+              text: 'Log In',
+              onPressed: (){ Navigator.pushNamed(context, WelcomeScreen.id); },
+              color: Colors.lightBlueAccent,
             ),
           ],
         ),

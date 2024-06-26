@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/constants.dart';
 import 'package:flutter_chat_app/screens/welcome_screen.dart';
-
 import '../widgets/rounded_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -32,52 +32,44 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             ),
             const SizedBox(height: 48.0,),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: const InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.blueAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
+              onChanged: (value) {
+                //Do something with the user input.
+              },
             ),
             const SizedBox(height: 8.0,),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: const InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 hintText: 'Enter your password',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.blueAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
+              onChanged: (value) {
+                //Do something with the user input.
+              },
             ),
             const SizedBox(height: 24.0,),
-            const RoundedButton(
+            RoundedButton(
               text: 'Register',
-              screenId: WelcomeScreen.id,
+              onPressed: (){ Navigator.pushNamed(context, WelcomeScreen.id); },
               color: Colors.blueAccent,
             ),
           ],
