@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/constants.dart';
-import 'package:flutter_chat_app/screens/welcome_screen.dart';
+import '../auth/firebase_auth.dart';
 import '../widgets/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -13,6 +14,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class RegistrationScreenState extends State<RegistrationScreen> {
+
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +38,8 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             ),
             const SizedBox(height: 48.0,),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               decoration: kInputDecoration.copyWith(
                 hintText: 'Enter your email',
                 enabledBorder: const OutlineInputBorder(
@@ -44,12 +52,12 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              onChanged: (value) { email = value; },
             ),
             const SizedBox(height: 8.0,),
             TextField(
+              obscureText: true,
+              textAlign: TextAlign.center,
               decoration: kInputDecoration.copyWith(
                 hintText: 'Enter your password',
                 enabledBorder: const OutlineInputBorder(
@@ -62,14 +70,12 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              onChanged: (value) { password = value; },
             ),
             const SizedBox(height: 24.0,),
             RoundedButton(
               text: 'Register',
-              onPressed: (){ Navigator.pushNamed(context, WelcomeScreen.id); },
+              onPressed: () => registerWithEmailAndPassword(context, _auth, email, password),
               color: Colors.blueAccent,
             ),
           ],
