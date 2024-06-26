@@ -5,7 +5,7 @@ import 'package:flutter_chat_app/screens/chat_screen.dart';
 import 'package:flutter_chat_app/screens/welcome_screen.dart';
 
 void loginWithEmailAndPassword(BuildContext context, FirebaseAuth fbInstance,
-    String email, String password) async {
+    String email, String password, Function changeLoadingState) async {
   try {
     final user = await fbInstance
         .signInWithEmailAndPassword(email: email, password: password);
@@ -27,7 +27,8 @@ void loginWithEmailAndPassword(BuildContext context, FirebaseAuth fbInstance,
 }
 
 void registerWithEmailAndPassword(BuildContext context, FirebaseAuth fbInstance,
-    String email, String password) async {
+    String email, String password, Function changeLoadingState) async {
+  changeLoadingState();
   try {
     final user = await fbInstance
         .createUserWithEmailAndPassword(email: email, password: password);
@@ -44,10 +45,24 @@ void registerWithEmailAndPassword(BuildContext context, FirebaseAuth fbInstance,
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(kWeakPasswordSnackbar);
       }
+    } else if (e.code == 'invalid-email') {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(kInvalidEmailSnackbar);
+      }
     } else {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(kGenericNotOkSnackbar);
       }
     }
+  } finally {
+    changeLoadingState();
+  }
+}
+
+void logout(BuildContext context, FirebaseAuth fbInstance) async {
+  await fbInstance.signOut();
+  if (context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(kLogoutOkSnackbar);
+    Navigator.pop(context);
   }
 }

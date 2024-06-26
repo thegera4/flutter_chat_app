@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../auth/firebase_auth.dart';
 import '../constants.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -42,10 +43,9 @@ class ChatScreenState extends State<ChatScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
+              icon: const Icon(Icons.logout),
+              onPressed: () => logout(context, _auth)
+              ),
         ],
         title: const Text('⚡️Chat'),
         backgroundColor: Colors.lightBlueAccent,

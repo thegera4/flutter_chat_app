@@ -18,6 +18,9 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
+  bool isLoading = false;
+
+  void changeLoadingState() => setState(() => isLoading = !isLoading);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +76,11 @@ class RegistrationScreenState extends State<RegistrationScreen> {
               onChanged: (value) { password = value; },
             ),
             const SizedBox(height: 24.0,),
+            isLoading ? const Center(child: CircularProgressIndicator()) :
             RoundedButton(
               text: 'Register',
-              onPressed: () => registerWithEmailAndPassword(context, _auth, email, password),
+              onPressed: () => registerWithEmailAndPassword(
+                  context, _auth, email, password, changeLoadingState),
               color: Colors.blueAccent,
             ),
           ],

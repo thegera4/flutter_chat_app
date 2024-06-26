@@ -104,6 +104,28 @@ const kWeakPasswordSnackbar = SnackBar(
   ),
 );
 
+const kInvalidEmailSnackbar = SnackBar(
+  width: 320,
+  padding: EdgeInsets.all(10),
+  behavior: SnackBarBehavior.floating,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+  duration: Duration(seconds: 4),
+  dismissDirection: DismissDirection.horizontal,
+  closeIconColor: Colors.white,
+  backgroundColor: Colors.red,
+  content: Center(
+    child: Text(
+      'Please enter a valid email.',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+);
+
 const kGenericNotOkSnackbar = SnackBar(
   width: 320,
   padding: EdgeInsets.all(10),
@@ -162,6 +184,28 @@ const kCredentialsNotOkSnackbar =SnackBar(
   content: Center(
     child: Text(
       'Invalid credentials try again.',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+);
+
+const kLogoutOkSnackbar = SnackBar(
+  width: 320,
+  padding: EdgeInsets.all(10),
+  behavior: SnackBarBehavior.floating,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+  duration: Duration(seconds: 4),
+  dismissDirection: DismissDirection.horizontal,
+  closeIconColor: Colors.white,
+  backgroundColor: Colors.green,
+  content: Center(
+    child: Text(
+      'Logout successful!. Goodbye.',
       style: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
