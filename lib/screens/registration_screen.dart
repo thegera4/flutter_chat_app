@@ -62,6 +62,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
               obscureText: true,
               textAlign: TextAlign.center,
               decoration: kInputDecoration.copyWith(
+                prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                 hintText: 'Enter your password',
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),

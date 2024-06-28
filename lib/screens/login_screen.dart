@@ -50,7 +50,10 @@ class LoginScreenState extends State<LoginScreen> {
             TextField(
               obscureText: true,
               textAlign: TextAlign.center,
-              decoration: kInputDecoration.copyWith(hintText: 'Enter your password'),
+              decoration: kInputDecoration.copyWith(
+                  prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                  hintText: 'Enter your password'
+              ),
               onChanged: (value) { password = value; },
             ),
             const SizedBox(height: 24.0,),
