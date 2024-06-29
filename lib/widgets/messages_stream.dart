@@ -25,7 +25,10 @@ class MessagesStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data?.docs.reversed;
+        final messages = snapshot.data?.docs;
+        //sort the messages based on the timestamp
+        messages?.sort((a, b) => (b.get('timestamp') as Timestamp)
+            .compareTo(a.get('timestamp') as Timestamp));
         List<MessageBubble> messageWidgets = [];
         for (var message in messages!) {
           final messageText = message.get('text');
