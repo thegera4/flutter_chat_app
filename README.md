@@ -1,16 +1,21 @@
-# flutter_chat_app
+# QChat (Quick Chat)
 
-Simple chat app to practice firebase integration
+Concept Chat app. The Authentication package and the Cloud Firestore package are used to implement Firebase integration.
 
-## Getting Started
+### Registration
 
-This project is a starting point for a Flutter application.
+You can register a new account. There are input validations with Firebase rules.
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://github.com/thegera4/flutter_chat_app/assets/84020433/31137f13-3e5d-410e-a3fd-2721728a01be" width="280" alt="registration">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Login / Logout
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+You can log in and out with Firebase authentication.
+
+<img src="https://github.com/thegera4/flutter_chat_app/assets/84020433/48e47c9e-dc59-46d2-a1c1-324bc1585260" width="280" alt="login-logout">
+
+### Send messages
+
+If you log in, you can start sending messages and they are saved and shown in real time! (powered by the StreamBuilder widget)
+
+<img src="https://github.com/thegera4/flutter_chat_app/assets/84020433/b3183d09-d120-41fd-97dc-8facfe06acc6" width="480" alt="stream">
