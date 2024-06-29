@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../auth/firebase_auth.dart';
 import '../constants.dart';
+import 'dart:developer' as developer;
+
+import '../widgets/messages_stream.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -15,18 +18,21 @@ class ChatScreen extends StatefulWidget {
 
 class ChatScreenState extends State<ChatScreen> {
 
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  final messageTextController = TextEditingController();
   late User loggedInUser;
+  late String messageText;
 
   void getCurrentUser() async {
     try {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        if (kDebugMode) { print(loggedInUser.email); }
+        developer.log(loggedInUser.email.toString());
       }
     } catch (e) {
-      if (kDebugMode) { print(e); }
+      developer.log(e.toString());
     }
   }
 
@@ -40,21 +46,23 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         leading: null,
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () => logout(context, _auth)
-              ),
+          ),
         ],
         title: const Text('⚡️Chat'),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.blue,
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            MessagesStream(fsInstance: _firestore, loggedInUser: loggedInUser),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -62,20 +70,21 @@ class ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {
-                        //Do something with the user input.
-                      },
+                      controller: messageTextController,
+                      onChanged: (value) => messageText = value,
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   TextButton(
                     onPressed: () {
-                      //Implement send functionality.
+                      messageTextController.clear();
+                      _firestore.collection('messages').add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                        'timestamp': FieldValue.serverTimestamp(),
+                      });
                     },
-                    child: const Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
+                    child: const Text('Send', style: kSendButtonTextStyle,),
                   ),
                 ],
               ),

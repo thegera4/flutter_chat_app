@@ -47,9 +47,11 @@ class WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderS
           children: <Widget>[
             Row(
               children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: SizedBox(height: 60.0, child: Image.asset('images/logo.png'),),
+                Flexible(
+                  child: Hero(
+                    tag: 'logo',
+                    child: SizedBox(height: 60.0, child: Image.asset('images/logo.png'),),
+                  ),
                 ),
                 SizedBox(
                   width: 250.0,

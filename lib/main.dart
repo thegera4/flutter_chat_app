@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
+        /*colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: Colors.indigo,
           secondary: Colors.indigoAccent,
-        ),
+        ),*/
         useMaterial3: true,
       ),
       initialRoute: WelcomeScreen.id,
